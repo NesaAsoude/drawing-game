@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Drawing Game</title>
+  <style>
+    body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0; flex-direction: column; }
+    canvas { border: 2px solid #000; background: #fff; }
+    button { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="400"></canvas>
+  <button onclick="clearCanvas()">پاک کردن</button>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let painting = false;
+
+    canvas.addEventListener('mousedown', () => painting = true);
+    canvas.addEventListener('mouseup', () => painting = false);
+    canvas.addEventListener('mousemove', draw);
+
+    function draw(e) {
+      if (!painting) return;
+      ctx.fillStyle = '#000';
+      ctx.beginPath();
+      ctx.arc(e.offsetX, e.offsetY, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  </script>
+</body>
+  </html>
